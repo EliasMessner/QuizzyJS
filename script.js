@@ -46,14 +46,18 @@ const quizData = [
     }
 ];
 
+let currentQuiz = 0;
+let currentQuestion = 0;
+let score = 0;
+
 
 function loadQuiz() {
-    document.getElementById('quiz-title').textContent = quizData[0].title;
+    document.getElementById('quiz-title').textContent = quizData[currentQuiz].title;
     showQuestion();
 }
 
 function showQuestion() {
-    const question = quizData[0].questions[0];
+    const question = quizData[currentQuiz].questions[currentQuestion];
     document.getElementById('question-container').textContent = question.question;
 
     const optionsContainer = document.getElementById('options-container');
@@ -63,8 +67,32 @@ function showQuestion() {
         const optionElement = document.createElement('div');
         optionElement.textContent = option;
         optionElement.classList.add('option');
+        optionElement.addEventListener('click', () => selectOption(index));
         optionsContainer.appendChild(optionElement);
     })
+}
+
+function selectOption(selectedOptionIndex) {
+    const question = quizData[currentQuiz].questions[currentQuestion];
+    const optionsContainer = document.getElementById('options-container');
+    optionsContainer.querySelectorAll('.option').forEach((optionElement, index) => {
+        optionElement.classList.remove('selected');
+        if (index === selectedOptionIndex) {
+            optionElement.classList.add('selected');
+            if (selectedOptionIndex === question.correct) {
+                score++;
+            }
+        }
+    });
+}
+
+function nextQuestion() {
+    if (currentQuestion < quizData[currentQuiz].questions.length - 1) {
+        currentQuestion++;
+        showQuestion();
+    } else {
+        showResult();
+    }
 }
 
 window.onload = loadQuiz;

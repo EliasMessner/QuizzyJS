@@ -41,3 +41,18 @@ body {
 .option.selected {
     background-color: #a0a0a0;
 }
+
+#next-button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#next-button:hover {
+    background-color: #0056b3;
+}
