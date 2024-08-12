@@ -62,6 +62,7 @@ function showQuestion() {
     question.options.forEach((option, index) => {
         const optionElement = document.createElement('div');
         optionElement.textContent = option;
+        optionElement.classList.add('option');
         optionsContainer.appendChild(optionElement);
     })
 }
