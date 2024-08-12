@@ -46,8 +46,24 @@ const quizData = [
     }
 ];
 
+
 function loadQuiz() {
     document.getElementById('quiz-title').textContent = quizData[0].title;
+    showQuestion();
+}
+
+function showQuestion() {
+    const question = quizData[0].questions[0];
+    document.getElementById('question-container').textContent = question.question;
+
+    const optionsContainer = document.getElementById('options-container');
+    optionsContainer.innerHTML = '';
+
+    question.options.forEach((option, index) => {
+        const optionElement = document.createElement('div');
+        optionElement.textContent = option;
+        optionsContainer.appendChild(optionElement);
+    })
 }
 
 window.onload = loadQuiz;
